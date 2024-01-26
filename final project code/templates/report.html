@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="refresh" content="5; URL=/home" />
+        <style>
+           #preloader {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    position: fixed;
+    background-color: #fff;
+}
+
+#loading-animation {
+      top: 30%;
+      left: 40%;
+      right: 30%;
+      bottom: 30%;
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      margin: -100px 0 0 -100px;
+      background: url('loading-animation.gif') center center no-repeat;
+}
+        </style>
+        <script type="text/javascript">
+            /* ======== Preloader ======== */
+            $(window).load(function() {
+                var preloaderDelay = 350,
+                        preloaderFadeOutTime = 800;
+        
+                function hidePreloader() {
+                    var loadingAnimation = $('#loading-animation'),
+                            preloader = $('#preloader');
+                    loadingAnimation.fadeOut();
+                    preloader.delay(preloaderDelay).fadeOut(preloaderFadeOutTime);
+                }
+        
+                hidePreloader();
+            
+            
+            });
+        </script>
+    </head>
+
+    <body>
+        <form action="/">
+        <div>
+            <div id="loading-animation"><img id="img1" src="https://cdn.svgator.com/images/2021/08/loader-preloader-example.gif"
+               width="500" height="400"></img>
+            </div>
+        </div>
+    </form>
+    </body>
+</html>

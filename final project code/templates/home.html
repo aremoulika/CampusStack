@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>StackyPane</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+    <script>document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        function ctrlShiftKey(e, keyCode) {
+            return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+        }
+
+        document.onkeydown = (e) => {
+            // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
+            if (
+                event.keyCode === 123 ||
+                ctrlShiftKey(e, 'I') ||
+                ctrlShiftKey(e, 'J') ||
+                ctrlShiftKey(e, 'C') ||
+                (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+            )
+                return false;
+        };</script>
+    <style>
+        @import url("http://fonts.googleapis.com/css?family=Roboto:700");
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0;
+            font-family: "Roboto";
+            text-align: center;
+            padding: 0;
+            font-size: 20px;
+            box-sizing: border-box;
+        }
+
+
+        img {
+            -webkit-animation: mover 2s infinite alternate;
+            animation: mover 2s infinite alternate;
+        }
+
+        @-webkit-keyframes mover {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes mover {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+
+
+        .dark-mode {
+            background-color: black;
+            color: rgb(0, 0, 0);
+
+        }
+
+
+        div#header {
+            position: sticky;
+            margin: 2% 14%;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            display: flex;
+        }
+
+        .logo {
+            width: 160px;
+            cursor: pointer;
+            animation: movedown 1s linear 1;
+            animation-delay: 1s;
+            visibility: hidden;
+            animation-fill-mode: forwards;
+        }
+
+
+        @keyframes movedown {
+            0% {
+                transform: translateY(-100px);
+                visibility: hidden;
+
+            }
+
+            100% {
+                transform: translateY(0);
+                visibility: hidden;
+            }
+        }
+
+        a {
+            color: #999;
+            padding: 1rem;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #ff8000;
+        }
+
+        a.brand {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        div#content {
+            position: sticky;
+            display: flex;
+
+        }
+
+        #container {
+            position: sticky;
+            width: fit-content;
+            color: #999;
+            text-transform: uppercase;
+            font-size: 36px;
+            font-weight: bold;
+            align-self: flex-start;
+            margin: 40% 60%;
+
+
+
+        }
+
+
+
+        .text p {
+            color: #000;
+        }
+
+        p::selection {
+            background: black;
+            color: black;
+        }
+
+        #flip {
+            height: 50px;
+            overflow: hidden;
+        }
+
+        #flip div div {
+            color: rgb(244, 240, 240);
+            padding: 1px 9px;
+            height: 45px;
+            margin-bottom: 45px;
+            display: inline-block;
+        }
+
+        #flip div:first-child {
+            animation: show 5s linear infinite;
+        }
+
+        #flip div div {
+            background: #42c58a;
+            animation: show 5s linear infinite;
+        }
+
+        #flip div:first-child div {
+            background: lightskyblue;
+            animation: show 5s linear infinite;
+        }
+
+        #flip div:last-child div {
+            background: red;
+            animation: show 5s linear infinite;
+        }
+
+        @keyframes show {
+            0% {
+                margin-top: -270px;
+            }
+
+            5% {
+                margin-top: -180px;
+            }
+
+            33% {
+                margin-top: -180px;
+            }
+
+            38% {
+                margin-top: -90px;
+            }
+
+            66% {
+                margin-top: -90px;
+            }
+
+            71% {
+                margin-top: -0px;
+            }
+
+            99.99% {
+                margin-top: -0px;
+            }
+
+            100% {
+                margin-top: -270px;
+            }
+        }
+
+        p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        a {
+            color: white;
+        }
+
+        div#figure {
+            max-width: 600;
+            width: 100%
+        }
+
+        svg#svg {
+            display: flex;
+            flex-wrap: nowrap;
+            margin: -27% 0%;
+        }
+
+
+        .background {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        img {
+            width: 700px;
+            float: center;
+
+        }
+
+        .buttons {
+            margin: 10%;
+            text-align: center;
+        }
+
+        .btn-hover {
+            width: 200px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            margin: 20px;
+            height: 50px;
+            text-align: center;
+            border: none;
+            background-size: 150% 50%;
+
+            border-radius: 25px;
+            -moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .btn-hover:hover {
+            background-position: 100% 0;
+            -moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .btn-hover:focus {
+            outline: none;
+        }
+
+
+        .btn-hover.color-8 {
+            background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+            box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+        }
+
+        .btn-hover.color-3 {
+            background-image: linear-gradient(to right, #667eea, #764ba2, #6b8dd6, #8e37d7);
+            box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+        }
+
+        /**/
+        /*          Styling Footer        */
+        /**/
+
+        /* Adding Styles to Company Details */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Yaldevi', sans-serif;
+        }
+
+        span {
+            color: #fc5c65;
+            font-weight: 900;
+
+        }
+
+        footer {
+            background: rgb(64, 66, 91);
+            padding: 20px 0;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap-reverse;
+        }
+
+        .logo {
+            width: 180px;
+        }
+
+        .social-media {
+            margin: 20px 0;
+        }
+
+        .social-media a {
+            color: #f7f9fa;
+            margin-right: 25px;
+            font-size: 22px;
+            text-decoration: none;
+            transition: .3s linear;
+        }
+
+        .social-media a:hover {
+            color: #fc5c65;
+        }
+
+        .right-col h1 {
+            font-size: 26px;
+        }
+
+        .border {
+            width: 100px;
+            height: 4px;
+            background: #fc5c65;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .txtb {
+            flex: 1;
+            padding: 18px 40px;
+            font-size: 16px;
+            color: #f4f6fb;
+            background: rgb(252, 250, 250);
+            border: none;
+            font-weight: 700;
+            outline: none;
+            border-radius: 30px;
+            min-width: 260px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 16px;
+            color: #f1f1f1;
+            background: #fc5c65;
+            border: none;
+            font-weight: 700;
+            outline: none;
+            border-radius: 30px;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: opacity .3s linear;
+        }
+
+        .btn:hover {
+            opacity: .7;
+        }
+
+        .page-content {
+            min-height: 100vh;
+            font-size: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and (max-width:960px) {
+            .footer-container {
+                max-width: 600px;
+            }
+
+            .right-col {
+                width: 100%;
+                margin-bottom: 60px;
+            }
+
+            .left-col {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        #c {
+            color: #999;
+
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Full-width input fields */
+        input[type=text],
+        input[type=password],
+        input[type=number],
+        input[type=email] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #0077ff;
+            color: white;
+            padding: 10px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 20%;
+            align-content: flex-end;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.avatar {
+
+            width: 15%;
+            border-radius: 15%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            align-self: center;
+        }
+
+        /* The Modal1,Modal2 (background) */
+        .modal1,
+        .modal2 {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+
+        /* Modal1,Modal2 Content/Box */
+        .modal1-content,
+        .modal2-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 30%;
+            /* Could be more or less, depending on screen size */
+        }
+
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Add Zoom Animation */
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+
+        @-webkit-keyframes animatezoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes animatezoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+
+        .header img {
+            float: left;
+            width: 40px;
+            height: 40px;
+            background: #555;
+        }
+
+        .header a {
+            position: relative;
+            top: auto;
+            left: auto;
+        }
+
+        body {
+            background: rgb(255, 255, 255);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .mytabs {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            max-height: 1000px;
+            margin: 100px auto;
+            padding: 25px;
+        }
+
+        .mytabs input[type="radio"] {
+            display: none;
+        }
+
+        .mytabs label {
+            padding: 20px;
+            background: rgb(92, 92, 142);
+            font-weight: bold;
+        }
+
+        .mytabs .tab {
+            padding: 20px;
+            background: #ccc;
+            order: 1;
+            display: none;
+        }
+
+        .mytabs .tab h2 {
+            font-size: 3em;
+        }
+
+        .mytabs input[type='radio']:checked+label+.tab {
+            display: block;
+        }
+
+        .mytabs input[type="radio"]:checked+label {
+            background: hsl(49, 37%, 75%);
+        }
+
+        #img {
+            position: absolute;
+            left: -160px;
+            top: 5px;
+        }
+
+        #img1 {
+            position: absolute;
+            float: center;
+            left: -100px;
+            top: 5px;
+        }
+
+        #c {
+            position: absolute;
+            left: -180px;
+            top: 0px;
+
+
+
+        }
+
+        #five {
+            position: absolute;
+            right: -180px;
+            top: -15px;
+        }
+
+
+        #four {
+            position: absolute;
+            right: 3px;
+            top: -15px;
+        }
+
+        #two {
+            position: absolute;
+            right: 240px;
+            top: -15px;
+        }
+
+        #one {
+            position: absolute;
+            right: 450px;
+            top: -15px;
+        }
+
+        @font-face {
+            font-family: Clip;
+            src: url("https://acupoftee.github.io/fonts/Clip.ttf");
+        }
+
+        .sign {
+            position: absolute;
+
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            width: 20%;
+            height: 20%;
+            background-image: radial-gradient(ellipse 50% 35% at 50% 50%,
+                    #6b1839,
+                    transparent);
+            transform: translate(-50%, -50%);
+            letter-spacing: 2;
+            left: 50%;
+            top: 50%;
+            font-family: "Clip";
+            text-transform: uppercase;
+            font-size: 3em;
+            color: red;
+
+        }
+
+        @keyframes blink {
+
+            0%,
+            22%,
+            36%,
+            75% {
+                color: rgb(243, 8, 8);
+
+            }
+
+            28%,
+            33% {
+                color: red;
+                text-shadow: none;
+            }
+
+            82%,
+            97% {
+                color: rgb(254, 2, 2);
+                text-shadow: none;
+            }
+        }
+
+        .flicker {
+            animation: shine 3s forwards, blink 3s 2s infinite;
+        }
+
+        .fast-flicker {
+            animation: shine 3s forwards, blink 3s 2s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                color: red;
+                text-shadow: none;
+            }
+
+            100% {
+                color: red;
+                text-shadow: 0 0 0.6rem grey, 0 0 1.5rem grey,
+                    -0.2rem 0rem 1rem grey, 0.2rem 0.1rem 1rem black,
+                    0 -0.5rem 2rem grey, 0 0.5rem 3rem grey;
+            }
+        }
+
+        @keyframes flicker {
+            from {
+                opacity: 1;
+            }
+
+            4% {
+                opacity: 0.9;
+            }
+
+            6% {
+                opacity: 0.85;
+            }
+
+            8% {
+                opacity: 0.95;
+            }
+
+            10% {
+                opacity: 0.9;
+            }
+
+            11% {
+                opacity: 0.922;
+            }
+
+            12% {
+                opacity: 0.9;
+            }
+
+            14% {
+                opacity: 0.95;
+            }
+
+            16% {
+                opacity: 0.98;
+            }
+
+            17% {
+                opacity: 0.9;
+            }
+
+            19% {
+                opacity: 0.93;
+            }
+
+            20% {
+                opacity: 0.99;
+            }
+
+            24% {
+                opacity: 1;
+            }
+
+            26% {
+                opacity: 0.94;
+            }
+
+            28% {
+                opacity: 0.98;
+            }
+
+            37% {
+                opacity: 0.93;
+            }
+
+            38% {
+                opacity: 0.5;
+            }
+
+            39% {
+                opacity: 0.96;
+            }
+
+            42% {
+                opacity: 1;
+            }
+
+            44% {
+                opacity: 0.97;
+            }
+
+            46% {
+                opacity: 0.94;
+            }
+
+            56% {
+                opacity: 0.9;
+            }
+
+            58% {
+                opacity: 0.9;
+            }
+
+            60% {
+                opacity: 0.99;
+            }
+
+            68% {
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 0.9;
+            }
+
+            72% {
+                opacity: 0.95;
+            }
+
+            93% {
+                opacity: 0.93;
+            }
+
+            95% {
+                opacity: 0.95;
+            }
+
+            97% {
+                opacity: 0.93;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #logo {
+            position: absolute;
+            left: -52px;
+            top: -3px;
+
+        }
+
+        .container1 {
+            flex-direction: column;
+            display: flex;
+            height: 10px;
+        }
+
+        .item1 {
+            background-color: #f4f6fb;
+        }
+
+        .item2 {
+            background-color: #f4f6fb;
+            flex-grow: 1;
+        }
+
+        body {
+            background: #fbfbfd;
+        }
+
+        .new_footer_area {
+            background: #fbfbfd;
+        }
+
+
+        .new_footer_top {
+            padding: 120px 0px 270px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .new_footer_area .footer_bottom {
+            padding-top: 5px;
+            padding-bottom: 50px;
+        }
+
+        .footer_bottom {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 20px;
+            color: #7f88a6;
+            padding: 27px 0px;
+        }
+
+        .new_footer_top .company_widget p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 28px;
+            color: #6a7695;
+            margin-bottom: 20px;
+        }
+
+        .new_footer_top .company_widget .f_subscribe_two .btn_get {
+            border-width: 1px;
+            margin-top: 20px;
+        }
+
+        .btn_get_two:hover {
+            background: transparent;
+            color: #5e2ced;
+        }
+
+        .btn_get:hover {
+            color: #fff;
+            background: #6754e2;
+            border-color: #6754e2;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        a:hover,
+        a:focus,
+        .btn:hover,
+        .btn:focus,
+        button:hover,
+        button:focus {
+            text-decoration: none;
+            outline: none;
+        }
+
+
+
+        .new_footer_top .f_widget.about-widget .f_list li a:hover {
+            color: #5e2ced;
+        }
+
+        .new_footer_top .f_widget.about-widget .f_list li {
+            margin-bottom: 11px;
+        }
+
+        .f_widget.about-widget .f_list li:last-child {
+            margin-bottom: 0px;
+        }
+
+        .f_widget.about-widget .f_list li {
+            margin-bottom: 15px;
+        }
+
+        .f_widget.about-widget .f_list {
+            margin-bottom: 0px;
+        }
+
+        .new_footer_top .f_social_icon a {
+            width: 44px;
+            height: 44px;
+            line-height: 43px;
+            background: transparent;
+            border: 1px solid #e2e2eb;
+            font-size: 24px;
+        }
+
+        .f_social_icon a {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 14px;
+            line-height: 45px;
+            color: #858da8;
+            display: inline-block;
+            background: #ebeef5;
+            text-align: center;
+            -webkit-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        .ti-facebook:before {
+            content: "\e741";
+        }
+
+        .ti-twitter-alt:before {
+            content: "\e74b";
+        }
+
+        .ti-vimeo-alt:before {
+            content: "\e74a";
+        }
+
+        .ti-pinterest:before {
+            content: "\e731";
+        }
+
+        .btn_get_two {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            background: #5e2ced;
+            border-color: #5e2ced;
+            color: #fff;
+        }
+
+        .btn_get_two:hover {
+            background: transparent;
+            color: #5e2ced;
+        }
+
+        .new_footer_top .f_social_icon a:hover {
+            background: #5e2ced;
+            border-color: #5e2ced;
+            color: white;
+        }
+
+        .new_footer_top .f_social_icon a+a {
+            margin-left: 4px;
+        }
+
+        .new_footer_top .f-title {
+            margin-bottom: 30px;
+            color: #263b5e;
+        }
+
+        .f_600 {
+            font-weight: 600;
+        }
+
+        .f_size_18 {
+            font-size: 18px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #4b505e;
+        }
+
+        .new_footer_top .f_widget.about-widget .f_list li a {
+            color: #6a7695;
+        }
+
+
+        .new_footer_top .footer_bg {
+            position: absolute;
+            bottom: 0;
+            background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigB8iI5tb8WSVBuVUGc9UjjB8O0708X7Fdic_4O1LT4CmLHoiwhanLXiRhe82yw0R7LgACQ2IhZaTY0hhmGi0gYp_Ynb49CVzfmXtYHUVKgXXpWvJ_oYT8cB4vzsnJLe3iCwuzj-w6PeYq_JaHmy_CoGoa6nw0FBo-2xLdOPvsLTh_fmYH2xhkaZ-OGQ/s16000/footer_bg.png") no-repeat scroll center 0;
+            width: 100%;
+            height: 266px;
+        }
+
+        .new_footer_top .footer_bg .footer_bg_one {
+            background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia0PYPxwT5ifToyP3SNZeQWfJEWrUENYA5IXM6sN5vLwAKvaJS1pQVu8mOFFUa_ET4JuHNTFAxKURFerJYHDUWXLXl1vDofYXuij45JZelYOjEFoCOn7E6Vxu0fwV7ACPzArcno1rYuVxGB7JY6G7__e4_KZW4lTYIaHSLVaVLzklZBLZnQw047oq5-Q/s16000/volks.gif") no-repeat center center;
+            width: 330px;
+            height: 105px;
+            background-size: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 30%;
+            -webkit-animation: myfirst 22s linear infinite;
+            animation: myfirst 22s linear infinite;
+        }
+
+        .new_footer_top .footer_bg .footer_bg_two {
+            background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyLGwEUVwPK6Vi8xXMymsc-ZXVwLWyXhogZxbcXQYSY55REw_0D4VTQnsVzCrL7nsyjd0P7RVOI5NKJbQ75koZIalD8mqbMquP20fL3DxsWngKkOLOzoOf9sMuxlbyfkIBTsDw5WFUj-YJiI50yzgVjF8cZPHhEjkOP_PRTQXDHEq8AyWpBiJdN9SfQA/s16000/cyclist.gif") no-repeat center center;
+            width: 88px;
+            height: 100px;
+            background-size: 100%;
+            bottom: 0;
+            left: 38%;
+            position: absolute;
+            -webkit-animation: myfirst 30s linear infinite;
+            animation: myfirst 30s linear infinite;
+        }
+
+
+
+        @-moz-keyframes myfirst {
+            0% {
+                left: -25%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @-webkit-keyframes myfirst {
+            0% {
+                left: -25%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes myfirst {
+            0% {
+                left: -25%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /************footer End****************/
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+
+</head>
+
+<body>
+
+
+
+    <canvas class="background"></canvas>
+    <div id="header" class="header">
+        <div class="sign" id="logo">
+            <span class="fast-flicker">Sta</span>cky<span class="flicker">Pa</span>ne
+        </div>
+        <div>
+            <button onclick="document.getElementById('id03').style.display='block'" style="width:auto;"
+                class="btn-hover color-8" id="one"><a href="/about" id="sc1">About</a></button>
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"
+                class="btn-hover color-8" id="two"><a> Admin Login</a></button>
+            <button class="btn-hover color-8" id="four"><a href="/developer">Developers Info</a></button>
+        </div>
+    </div>
+
+
+    <div id="content">
+        <div id="" style="align-self:flex-start ;margin:1% 12.6% ;color: #999;
+        text-transform: uppercase;
+        font-size: 36px;
+        font-weight: bold;"><br><br><br>
+            <div>
+                <h3>
+                    <p>OUR JOB IS TO</p>
+                    <div>MAKE</div>
+                    <div id="flip">
+                        <div>
+                            <div>WORK</div>
+                        </div>
+                        <div>
+                            <div>LIFESTYLE</div>
+                        </div>
+                        <div>
+                            <div>EVERYTHING</div>
+                        </div>
+                    </div>
+                    <div>AWESOME!</div>
+                    <button style="width:auto;" class="btn-hover color-3" onClick="location.href='/main'">Ask Your
+                        Query</button>
+            </div>
+            </h3>
+        </div>
+        <div><br><br><br><br><br><br>
+            <img align="right" src="http://www.prometeo.in/static/img/hero-img.png" height="450" alt="">
+        </div>
+    </div>
+    </div>
+    <footer class="new_footer_area bg_color">
+        <div class="new_footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s"
+                            style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInLeft;">
+                            <h3 class="f-title f_600 t_color f_size_18">STACKY PANE</h3>
+                            <div class="f_social_icon">
+                                <a href="https://www.facebook.com/kitsguntur/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://mobile.twitter.com/kits_guntur"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/kits_guntur/?hl=en"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UC36FcLFriKtSPYRiMei75sA/featured"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/in/kits-guntur-b49982139/?originalSubdomain=in"><i
+                            class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_bg">
+                <div class="footer_bg_one"></div>
+                <div class="footer_bg_two"></div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+
+    </footer>
+    <script>
+        window.onload = function () {
+
+            Particles.init({
+
+                // normal options
+                selector:
+                    '.background'
+                ,
+                breakpoint: 768,
+                color: "#7B68EE",
+                sizeVariation: 10,
+                maxParticles:
+                    700
+                ,
+
+                // options for breakpoints
+                responsive: [
+                    {
+                        breakpoint:
+                            768
+                        ,
+                        options: {
+                            maxParticles:
+                                45
+                            ,
+                            color:
+                                '#48F2E3'
+                            ,
+                            connectParticles:
+                                false
+                        }
+                    }, {
+                        breakpoint:
+                            422
+                        ,
+                        options: {
+                            maxParticles:
+                                20
+                            ,
+                            connectParticles:
+                                true
+                        }
+                    }, {
+                        breakpoint:
+                            320
+                        ,
+                        options: {
+                            maxParticles:
+                                0
+
+                            // disables particles.js
+                        }
+                    }
+                ]
+            });
+
+        }
+
+
+    </script>
+    </div>
+
+    <script>
+        var loader = document.getElementById("preloader");
+        window.addEventListener("load", function () {
+            loader.style.display = "none"
+        })
+    </script>
+
+    <div id="id01" class="modal1">
+
+        <form class="modal1-content animate" action="/log" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                    title="Close Modal1">&times;</span>
+                <img src="https://www.disneyplusinformer.com/wp-content/uploads/2021/06/Luca-Profile-Avatars-3.png"
+                    alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container" align="left">
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Email*" name="email" required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Password*" name="password" required>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+
+                <button type="submit">Login</button>
+
+
+            </div>
+
+            <div class="container" align='left' style="background-color:#4cc9b4">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+
+            </div>
+        </form>
+
+    </div>
+
+
+    <script>
+        // Get the modal1,modal2
+        var modal1 = document.getElementById('id01');
+        var modal2 = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal1,modal2, close it
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <script>
+        function darkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+
+    <script>
+        function jump(h) {
+            var url = location.href;               //Save down the URL without hash.
+            location.href = "#" + h;                 //Go to the target element.
+            history.replaceState(null, null, url);   //Don't like hashes. Changing it back.
+        }
+
+        jump({ anchor });
+    </script>
+    <script type="text/javascript">
+        /* ======== Preloader ======== */
+        $(window).load(function () {
+            var preloaderDelay = 3000,
+                preloaderFadeOutTime = 1000;
+
+            function hidePreloader() {
+                var loadingAnimation = $('#loading-animation'),
+                    preloader = $('#preloader'),
+                    container1 = $('#container1');
+                loadingAnimation.fadeOut();
+                preloader.delay(preloaderDelay).fadeOut(preloaderFadeOutTime);
+            }
+
+            hidePreloader();
+        });
+    </script>
+
+
+</body>
+
+</html>
